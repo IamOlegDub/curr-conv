@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import cn from "classnames";
 
-import styles from "./Main.module.css";
 import InputData from "./InputData";
 
+import styles from "./Main.module.css";
+
 export default function Main() {
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState("");
     const [firstCurrency, setFirstCurrency] = useState("USD");
     const [secondCurrency, setSecondCurrency] = useState("EUR");
     const [exchangeRate, setExchangeRate] = useState();
     const [firstMoney, setFirstMoney] = useState(true);
+    const [error, setError] = useState(null);
 
     const currencyList = ["USD", "EUR", "UAH", "GBP", "PLN"];
 
@@ -42,15 +43,22 @@ export default function Main() {
                 `https://v6.exchangerate-api.com/v6/7cc8565835b9b47e14685f57/pair/${firstCurrency}/${secondCurrency}`
             )
                 .then((response) => response.json())
-                .then((responseData) => {
-                    setExchangeRate(responseData.conversion_rate);
-                });
+                .then(
+                    (responseData) => {
+                        setExchangeRate(responseData.conversion_rate);
+                    },
+                    (error) => {
+                        setError(error);
+                    }
+                );
         }
     }, [firstCurrency, secondCurrency, first, second]);
 
-    let firstAmount = 1,
-        secondAmount = 1;
-    if (firstMoney) {
+    let firstAmount = "",
+        secondAmount = 0;
+    if (!amount) {
+        secondAmount = "";
+    } else if (firstMoney) {
         firstAmount = amount;
         secondAmount = firstAmount * exchangeRate || 0;
         secondAmount = secondAmount.toFixed(2);
@@ -85,25 +93,28 @@ export default function Main() {
             setSecondCurrency(item);
         }
     };
-
-    return (
-        <div className={cn(styles.main)}>
-            <div className={styles.inputDataList}>
-                <InputData
-                    currencyList={currencyList}
-                    currency={firstCurrency}
-                    onInputChange={onFirstInputChange}
-                    onSetCurrency={onSetFirstCurrency}
-                    inputAmount={firstAmount}
-                />
-                <InputData
-                    currencyList={currencyList}
-                    currency={secondCurrency}
-                    onInputChange={onSecondInputChange}
-                    onSetCurrency={onSetSecondCurrency}
-                    inputAmount={secondAmount}
-                />
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else
+        return (
+            <div className={styles.main}>
+                <div className={styles.inputDataList}>
+                    <InputData
+                        currencyList={currencyList}
+                        currency={firstCurrency}
+                        onInputChange={onFirstInputChange}
+                        onSetCurrency={onSetFirstCurrency}
+                        inputAmount={firstAmount}
+                        placeholder={"type here"}
+                    />
+                    <InputData
+                        currencyList={currencyList}
+                        currency={secondCurrency}
+                        onInputChange={onSecondInputChange}
+                        onSetCurrency={onSetSecondCurrency}
+                        inputAmount={secondAmount}
+                    />
+                </div>
             </div>
-        </div>
-    );
+        );
 }

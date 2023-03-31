@@ -1,6 +1,8 @@
-import cn from "classnames";
 import React, { useRef, useState } from "react";
+import cn from "classnames";
+
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+
 import styles from "./Main.module.css";
 
 export default function InputData({
@@ -9,6 +11,7 @@ export default function InputData({
     onInputChange,
     onSetCurrency,
     inputAmount,
+    placeholder,
 }) {
     const [selectOpen, setSelectOpen] = useState(false);
 
@@ -28,6 +31,7 @@ export default function InputData({
                 type="number"
                 onChange={(e) => onInputChange(e)}
                 min="1"
+                placeholder={placeholder}
             />
             <div
                 className={styles.select}
