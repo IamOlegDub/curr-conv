@@ -27,6 +27,27 @@ li {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #c1c1c1;
+}
+
 :root {
     --text: #3b3d3c;
     --textDark: #e8edeb;
@@ -34,6 +55,6 @@ li {
     --mainBackgroundDark: rgb(44, 43, 71);
     --primary: #b793e0;
     --secondary: #476e84;
-    --contentBackground: rgb(168, 213, 203);
+    --contentBackground: rgb(199, 233, 238);
     --bubbles: rgba(32, 22, 22, 0.27);
 }

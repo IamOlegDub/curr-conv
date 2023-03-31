@@ -12,7 +12,7 @@ export default function Header() {
     const [data, loaded, error] = useAxios(url);
 
     if (loaded) {
-        return <div>1</div>;
+        return <div className={styles.header}></div>;
     }
     if (error) {
         return "Something went wrong!";

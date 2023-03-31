@@ -12,7 +12,7 @@
     background: var(--contentBackground);
     border-radius: 0 0 6px 6px;
     padding: 10px 30px;
-    box-shadow: 10px 10px 15px rgb(0 0 0 / 2%);
+    box-shadow: 0px 20px 22px rgb(0 0 0 / 15%);
     align-content: center;
     justify-items: start;
     column-gap: 20px;

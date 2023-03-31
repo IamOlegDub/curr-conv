@@ -11,7 +11,7 @@ export default function Main() {
     const [exchangeRate, setExchangeRate] = useState();
     const [firstMoney, setFirstMoney] = useState(true);
 
-    const currencyList = ["USD", "EUR", "UAH"];
+    const currencyList = ["USD", "EUR", "UAH", "GBP", "PLN"];
 
     function useFirstCurrency(value) {
         const ref = useRef();

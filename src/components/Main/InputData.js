@@ -1,5 +1,6 @@
 import cn from "classnames";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 import styles from "./Main.module.css";
 
 export default function InputData({
@@ -10,6 +11,14 @@ export default function InputData({
     inputAmount,
 }) {
     const [selectOpen, setSelectOpen] = useState(false);
+
+    const currencyListRef = useRef(null);
+
+    const currencyListClose = () => {
+        setSelectOpen(false);
+    };
+
+    useOutsideClick(currencyListRef, currencyListClose, selectOpen);
 
     return (
         <div className={styles.InputDataItem}>
@@ -23,8 +32,14 @@ export default function InputData({
             <div
                 className={styles.select}
                 onClick={() => setSelectOpen((state) => !state)}
+                ref={currencyListRef}
             >
                 {currency}
+                <div
+                    className={cn(styles.arrow, {
+                        [styles.arrowActive]: selectOpen,
+                    })}
+                ></div>
                 <div
                     className={cn(styles.optionWrapper, {
                         [styles.optionWrapperActive]: selectOpen,

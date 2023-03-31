@@ -2,6 +2,7 @@
     text-align: center;
     position: relative;
     height: 100vh;
+    overflow: hidden;
 }
 .headerContainer {
     position: fixed;

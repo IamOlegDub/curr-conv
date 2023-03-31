@@ -4,7 +4,6 @@ import Bubbles from "./components/Bubbles";
 
 import Header from "./components/Header";
 import Main from "./components/Main";
-import { useEffect, useState } from "react";
 
 function App() {
     return (
